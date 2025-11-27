@@ -1,0 +1,40 @@
+name: PokéScan
+options:
+  bundleIdPrefix: com.guicf
+  deploymentTarget:
+    iOS: '15.0'
+targets:
+  PokéScan:
+    type: framework
+    platform: iOS
+    sources:
+      - PokéScan
+    resources:
+      - PokéScan/Resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.guicf.Poke-Scan
+        SWIFT_VERSION: 5.0
+        GENERATE_INFOPLIST_FILE: YES
+    dependencies: []
+    PokéScanTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - PokéScanTests
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - target: PokéScan
+schemes:
+  PokéScan:
+    build:
+      targets:
+        PokéScan: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+    archive:
+      config: Release

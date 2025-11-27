@@ -1,0 +1,16 @@
+disabled_rules:
+  - trailing_whitespace
+
+opt_in_rules:
+  - force_unwrapping
+  - closure_end_indentation
+  - trailing_whitespace
+
+included:
+  - ../Sources
+  
+excluded:
+  - Pods
+  - Carthage
+
+reporter: xcode
