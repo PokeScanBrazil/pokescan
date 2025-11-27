@@ -29,8 +29,8 @@ open:
 	echo "Generating Xcode project using XcodeGen..."
 	xcodegen
 	echo "Done! Opening the .xcworkspace!"
-	if [ -d "PokeScan.xcworkspace" ]; then \
-		open PokeScan.xcworkspace; \
+	if [ -d "PokéScan.xcworkspace" ]; then \
+		open PokéScan.xcworkspace; \
 	else \
-		open PokeScan.xcodeproj; \
+		open PokéScan.xcodeproj; \
 	fi
