@@ -11,7 +11,7 @@ import SwiftUI
 struct Poke_ScanApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CardReaderView()
         }
     }
 }

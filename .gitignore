@@ -1,62 +1,83 @@
-# Xcode
-#
-# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+# ===========================
+# Xcode / macOS
+# ===========================
+.DS_Store
+*.swp
+*.lock
+*.plist~
+*.xcuserstate
 
-## User settings
+# User-specific Xcode files
 xcuserdata/
+*.xcuserdatad
+*.moved-aside
+*.xcscmblueprint
+*.xccheckout
 
-## Obj-C/Swift specific
-*.hmap
+# Xcode project files
+# DO NOT ignore the .xcodeproj itself, only its user data
+**/*.pbxuser
+**/*.mode1v3
+**/*.mode2v3
+**/*.perspectivev3
 
-## App packaging
+# Derived data and builds
+DerivedData/
+build/
+Build/
 *.ipa
-*.dSYM.zip
 *.dSYM
+*.dSYM.zip
 
-## Playgrounds
-timeline.xctimeline
-playground.xcworkspace
-
+# ===========================
 # Swift Package Manager
-#
-# Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
-# Packages/
-# Package.pins
-# Package.resolved
-# *.xcodeproj
-#
-# Xcode automatically generates this directory with a .xcworkspacedata file and xcuserdata
-# hence it is not needed unless you have added a package configuration file to your project
-# .swiftpm
-
+# ===========================
+.swiftpm/
+Packages/
 .build/
 
+# ===========================
 # CocoaPods
-#
-# We recommend against adding the Pods directory to your .gitignore. However
-# you should judge for yourself, the pros and cons are mentioned at:
-# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
-#
-# Pods/
-#
-# Add this line if you want to avoid checking in source code from the Xcode workspace
-# *.xcworkspace
+# ===========================
+Pods/
+Podfile.lock
 
+# ===========================
 # Carthage
-#
-# Add this line if you want to avoid checking in source code from Carthage dependencies.
-# Carthage/Checkouts
-
+# ===========================
+Carthage/
 Carthage/Build/
 
-# fastlane
-#
-# It is recommended to not store the screenshots in the git repo.
-# Instead, use fastlane to re-generate the screenshots whenever they are needed.
-# For more information about the recommended setup visit:
-# https://docs.fastlane.tools/best-practices/source-control/#source-control
+# ===========================
+# XcodeGen
+# ===========================
+# Ignore the generated project to ensure deterministic builds
+PokeScan.xcodeproj/
+PokeScan.xcworkspace/
+project.xcworkspace/
 
+# If you keep generated files outside root, ignore them here
+*.xcodeproj/
+*.xcworkspace/
+
+# ===========================
+# SwiftLint
+# ===========================
+swiftlint.log
+
+# ===========================
+# Fastlane
+# ===========================
 fastlane/report.xml
 fastlane/Preview.html
-fastlane/screenshots/**/*.png
+fastlane/screenshots
 fastlane/test_output
+
+# ===========================
+# Output / Cache
+# ===========================
+*.zip
+*.tar.gz
+*.map
+*.coverage
+*.profdata

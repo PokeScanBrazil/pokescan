@@ -1,0 +1,94 @@
+name: PokéScan
+platform: [iOS]
+
+options:
+  bundleIdPrefix: com.guicf
+  deploymentTarget:
+    iOS: "15.0"
+  preGenCommand: |
+    rm -rf PokéScan.xcodeproj
+    rm -rf PokéScan.xcworkspace
+  postGenCommand: open "${PWD}/PokéScan.xcodeproj"
+
+fileGroups:
+  - project.yml
+  - Resources
+
+targets:
+  PokéScan:
+    type: application
+    platform: iOS
+
+    sources:
+      - Sources
+    resources:
+      - Resources
+      - Assets.xcassets
+
+    info:
+      path: Resources/Info.plist
+      properties:
+        CFBundleName: PokéScan
+        CFBundleDisplayName: PokéScan
+        CFBundleIdentifier: com.guicf.Poke-Scan
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
+
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+          UISceneConfigurations:
+            UIWindowSceneSessionRoleApplication:
+              - UISceneConfigurationName: Default Configuration
+
+        UILaunchScreen: {}
+
+        NSAppTransportSecurity:
+            NSAllowsArbitraryLoads: true
+            NSExceptionDomains:
+            localhost:
+              NSExceptionAllowsInsecureHTTPLoads: true
+              NSExceptionRequiresForwardSecrecy: false
+              NSIncludesSubdomains: true
+
+        NSLocalNetworkUsageDescription: "O app precisa acessar o servidor local para buscar informações."
+        NSBonjourServices:
+          - _http._tcp
+          - _https._tcp
+        NSLocalNetworkInterfaces:
+          - en0
+
+
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.guicf.Poke-Scan
+        SWIFT_VERSION: 5.0
+        GENERATE_INFOPLIST_FILE: YES
+
+      configs:
+        Debug:
+          SWIFT_OPTIMIZATION_LEVEL: "-Onone"
+          OTHER_SWIFT_FLAGS: "$(inherited) -DDEBUG"
+        Release:
+          SWIFT_OPTIMIZATION_LEVEL: "-Owholemodule"
+
+    buildScripts:
+      - name: SwiftLint
+        script: |
+          if which swiftlint > /dev/null; then
+            swiftlint
+          else
+            echo "warning: SwiftLint não está instalado"
+          fi
+        runOnlyWhenInstalling: false
+
+schemes:
+  PokéScan:
+    build:
+      targets:
+        PokéScan: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+    archive:
+      config: Release
