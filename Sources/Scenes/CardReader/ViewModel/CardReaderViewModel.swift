@@ -5,6 +5,7 @@
 //  Created by João Guilherme on 26/11/25.
 //
 import SwiftUI
+import Vision
 
 @MainActor
 final class CardReaderViewModel: ObservableObject {
@@ -13,8 +14,10 @@ final class CardReaderViewModel: ObservableObject {
     @Published var collection2: String = .empty
     @Published var card: Card?
     @Published var isLoading = false
+    @Published var detectedText: String = String.empty
     
     private let service = CardService()
+    private let reader = LiveTextReader()
     
     func readPokemonCard() async {
         isLoading = true
@@ -25,6 +28,15 @@ final class CardReaderViewModel: ObservableObject {
             card = response
         } catch {
             print("❌ Error:", error)
+        }
+    }
+    
+    func handleFrame(_ buffer: CVPixelBuffer) {
+        reader.detectText(pixelBuffer: buffer) { [weak self] strings in
+            guard let self else { return }
+            Task { @MainActor in
+                self.detectedText = strings.joined(separator: "/")
+            }
         }
     }
 }

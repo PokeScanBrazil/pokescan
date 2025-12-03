@@ -17,15 +17,26 @@ struct CardReaderView: View {
         ZStack {
             CameraPreviewView(manager: camera)
                 .ignoresSafeArea()
+            
+            CardRegionOverlayView()
+                .cornerRadius(8)
+                .border(Color.gray, width: 3)
+                .padding(.horizontal, 60)
+                .padding(.vertical, 200)
+            
             VStack {
                 Spacer()
-                Text("Camera Preview")
+                Text(viewModel.detectedText)
                     .font(.title2)
                     .padding()
                     .background(.black.opacity(0.6))
                     .foregroundColor(.white)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
                     .padding(.bottom, 40)
+            }
+        }.onAppear {
+            camera.onFrame = { buffer in
+                viewModel.handleFrame(buffer)
             }
         }
     }
