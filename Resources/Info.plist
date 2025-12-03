@@ -41,6 +41,8 @@
 		<string>_http._tcp</string>
 		<string>_https._tcp</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>O app precisa acessar a camera para ler suas cartas</string>
 	<key>NSLocalNetworkInterfaces</key>
 	<array>
 		<string>en0</string>
