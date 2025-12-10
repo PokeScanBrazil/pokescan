@@ -14,7 +14,8 @@ final class CardReaderViewModel: ObservableObject {
     @Published var collection2: String = .empty
     @Published var card: Card?
     @Published var isLoading = false
-    @Published var detectedText: String = String.empty
+    @Published var detectedName: String = String.empty
+    @Published var detectedCollection: String = String.empty
     
     private let service = CardService()
     private let reader = LiveTextReader()
@@ -31,12 +32,13 @@ final class CardReaderViewModel: ObservableObject {
         }
     }
     
-    func handleFrame(_ buffer: CVPixelBuffer) {
-        reader.detectText(pixelBuffer: buffer) { [weak self] strings in
-            guard let self else { return }
-            Task { @MainActor in
-                self.detectedText = strings.joined(separator: "/")
-            }
+    func bindCamera(_ camera: CameraManager) {
+        camera.onCardNameDetected = { [ weak self ] text in
+            self?.detectedName = text
+        }
+        
+        camera.onCollectionDetected = { [ weak self ] text in
+            self?.detectedCollection = text
         }
     }
 }

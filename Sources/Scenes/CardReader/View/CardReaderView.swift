@@ -13,7 +13,6 @@ struct CardReaderView: View {
     @StateObject private var camera = CameraManager()
     
     var body: some View {
-        
         ZStack {
             CameraPreviewView(manager: camera)
                 .ignoresSafeArea()
@@ -23,10 +22,13 @@ struct CardReaderView: View {
                 .border(Color.gray, width: 3)
                 .padding(.horizontal, 60)
                 .padding(.vertical, 200)
+
+            // ROI: Coleção
+            ScanningOverlay(rect: camera.roiCollectionRect, color: .red)
             
             VStack {
                 Spacer()
-                Text(viewModel.detectedText)
+                Text("Card: \(viewModel.detectedName), Colecao: \(viewModel.detectedCollection)")
                     .font(.title2)
                     .padding()
                     .background(.black.opacity(0.6))
@@ -35,9 +37,7 @@ struct CardReaderView: View {
                     .padding(.bottom, 40)
             }
         }.onAppear {
-            camera.onFrame = { buffer in
-                viewModel.handleFrame(buffer)
-            }
+            viewModel.bindCamera(camera)
         }
     }
 }
